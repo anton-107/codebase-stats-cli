@@ -4,19 +4,18 @@ import simpleImportSort from "eslint-plugin-simple-import-sort";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
-
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  {files: ["**/*.{ts,tsx}"]},
-  {files: ["**/*.ts"], languageOptions: {sourceType: "script"}},
-  {languageOptions: { globals: globals.node }},
+  { files: ["**/*.{ts,tsx}"] },
+  { files: ["**/*.ts"], languageOptions: { sourceType: "script" } },
+  { languageOptions: { globals: globals.node } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   comments.recommended,
   {
     rules: {
-      "@eslint-community/eslint-comments/no-unused-disable": "error"
-    }
+      "@eslint-community/eslint-comments/no-unused-disable": "error",
+    },
   },
   {
     plugins: {
@@ -36,6 +35,6 @@ export default [
       "max-lines-per-function": ["error", 56],
       "max-statements": ["error", 22],
       "max-params": ["error", 3],
-    }
-  }
+    },
+  },
 ];
