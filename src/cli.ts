@@ -1,6 +1,6 @@
 import { cli, command } from "cleye";
 
-export class CommandLineInterface {
+export class CommandLineInterface {  
   constructor() {}
   public run() {
     cli({
@@ -18,11 +18,13 @@ export class CommandLineInterface {
           },
           async (argv) => {
             const repo = argv._.pathToRepository;
+            // eslint-disable-next-line no-console
             console.log(
               "Calculating files with least number of contributors",
               repo,
             );
             if (argv.flags.ignoreFiles) {
+              // eslint-disable-next-line no-console
               console.log(
                 "will ignore the following files in the output: ",
                 argv.flags.ignoreFiles,
