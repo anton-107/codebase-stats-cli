@@ -1,3 +1,7 @@
-import { CommandLineInterface } from "./cli";
+import { CommandLineInterface } from "./cli.js";
 
-new CommandLineInterface().run();
+
+export function main() {
+    new CommandLineInterface().run();
+}
+main();

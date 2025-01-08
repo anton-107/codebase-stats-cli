@@ -2,6 +2,7 @@
   "name": "codebase-stats-cli",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "test": "jest",
@@ -11,7 +12,7 @@
     "lint": "eslint .",
     "fix-lint": "eslint . --fix",
     "fix": "npm run fix-format && npm run fix-lint",
-    "cli": "ts-node src/main.ts"
+    "cli": "NODE_OPTIONS=\"--loader ts-node/esm\" node src/main.ts"
   },
   "keywords": [],
   "author": "",
