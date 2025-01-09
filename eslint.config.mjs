@@ -6,7 +6,12 @@ import tseslint from "typescript-eslint";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  { files: ["**/*.{ts,tsx}"] },
+  { 
+    files: ["**/*.{ts,tsx}"]
+  },
+  {
+    ignores: ["coverage/**"]
+  },
   { files: ["**/*.ts"], languageOptions: { sourceType: "script" } },
   { languageOptions: { globals: globals.node } },
   pluginJs.configs.recommended,
