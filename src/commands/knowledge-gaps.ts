@@ -1,38 +1,9 @@
-import { debug } from "codebase-stats-collector/dist/console/console.js";
 import { SummaryDashboard } from "codebase-stats-collector/dist/dashboard/summary-dashboard.js";
 import { GitRepository } from "codebase-stats-collector/dist/git-reader/git-repository.js";
-import { ExpandedCommit } from "codebase-stats-collector/dist/interfaces.js";
 import { getNumberOfContributorsPerFile } from "codebase-stats-collector/dist/stats/number-of-contributors-per-file.js";
-import { Readable } from "stream";
 
 import { log } from "../console.js";
-
-function setupProgressStream(summaryDashboard: SummaryDashboard): Readable {
-  let commitsCounter = 0;
-
-  const commitsStream = new Readable({
-    objectMode: true,
-    read() {
-      // do nothing.
-    },
-  });
-  commitsStream.on("data", (commit: ExpandedCommit) => {
-    debug("Commit", commit);
-
-    commitsCounter += 1;
-    summaryDashboard.setCurrentProgress(commitsCounter, commit);
-  });
-  commitsStream.on("error", (err) => {
-    debug("error reading commits", { err });
-  });
-  commitsStream.on("end", () => {
-    debug("done reading commits", {});
-  });
-  commitsStream.on("close", () => {
-    debug("stream closed", {});
-  });
-  return commitsStream;
-}
+import { setupProgressStream } from "../dashboard/progress.js";
 
 export async function collectKnowledgeGaps(
   dir: string,

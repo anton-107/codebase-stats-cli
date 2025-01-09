@@ -1,5 +1,6 @@
 import { cli, command } from "cleye";
 
+import { collectHotSpots } from "./commands/hot-spots.js";
 import { collectKnowledgeGaps } from "./commands/knowledge-gaps.js";
 import { log } from "./console.js";
 
@@ -8,6 +9,17 @@ export class CommandLineInterface {
   public run() {
     cli({
       commands: [
+        command(
+          {
+            name: "hot-spots",
+            parameters: ["<path to repository>"],
+          },
+          async (argv) => {
+            const dir = argv._.pathToRepository;
+            log("Collecting files with most changes", dir);
+            await collectHotSpots(dir);
+          },
+        ),
         command(
           {
             name: "knowledge-gaps",
@@ -21,7 +33,7 @@ export class CommandLineInterface {
           },
           async (argv) => {
             const dir = argv._.pathToRepository;
-            log("Calculating files with least number of contributors", dir);
+            log("Collecting files with least number of contributors", dir);
             let ignoreFilesPattern: string | null = null;
             if (argv.flags.ignoreFiles) {
               // eslint-disable-next-line no-console
